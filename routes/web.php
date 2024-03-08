@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\EventsController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Category;
 use App\Models\User;
@@ -32,7 +33,7 @@ Route::get('/dashboard', function () {
     $organizators = count($organizatorsData);
 
 
-    return view('dashboard', compact('users', 'organizators', 'usersData', 'organizatorsData, categories'));
+    return view('dashboard', compact('users', 'organizators', 'usersData', 'organizatorsData', 'categories'));
 })->middleware(['checkBan', 'auth'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -44,6 +45,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/categories', [CategoriesController::class, 'create'])->name('create.category');
     Route::post('/categories/edit', [CategoriesController::class, 'edit'])->name('edit.category');
     Route::post('/categories/delete', [CategoriesController::class, 'delete'])->name('delete.category');
+    Route::post('/dashboard/addevent', [EventsController::class, 'create'])->name('create.event');
 });
 
 

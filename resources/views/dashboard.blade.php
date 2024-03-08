@@ -211,35 +211,63 @@
     <dialog id="eventCreator" class="modal">
     <div class="modal-box">
         <h3 class="font-bold text-lg mb-4">Create new event</h3>
-        <form id = "eventForm" method = "POST" action = "{{ route('create.category') }}">
+        <form id = "eventForm" method = "POST" action = "{{ route('create.event') }}">
             @csrf
             <x-input-label for="eventsTitle" :value="__('Title')" />
-            <x-text-input id="eventsTitle" class="block mt-1 w-full" type="text" name="title" :value="old('category')" required autofocus />
-            <x-input-error :messages="$errors->get('eventTitle')" class="mt-2" />
+            <x-text-input id="eventsTitle" class="block mt-1 mb-2 w-full" type="text" name="title" :value="old('category')" required autofocus />
+            <x-input-error :messages="$errors->get('eventTitle')" class="my-2" />
 
             <x-input-label for="eventsDesc" :value="__('Description')" />
-            <x-text-input id="eventsDesc" class="block mt-1 w-full" type="text" name="description" :value="old('category')" required autofocus />
-            <x-input-error :messages="$errors->get('eventDesc')" class="mt-2" />
+            <x-text-input id="eventsDesc" class="block mt-1 mb-2 w-full" type="text" name="description" :value="old('category')" required autofocus />
+            <x-input-error :messages="$errors->get('eventDesc')" class="my-2" />
 
             <x-input-label for="eventsDate" :value="__('Date')" />
-            <x-text-input id="eventsDate" class="block mt-1 w-full" type="date" name="date" :value="old('category')" required autofocus />
-            <x-input-error :messages="$errors->get('eventDate')" class="mt-2" />
+            <x-text-input id="eventsDate" class="block mt-1 mb-2 w-full" type="date" name="date" :value="old('category')" required autofocus />
+            <x-input-error :messages="$errors->get('eventDate')" class="my-2" />
 
             <x-input-label for="eventsLoca" :value="__('Location')" />
-            <x-text-input id="eventsLoca" class="block mt-1 w-full" type="text" name="location" :value="old('category')" required autofocus />
-            <x-input-error :messages="$errors->get('eventLoca')" class="mt-2" />
+            <x-text-input id="eventsLoca" class="block mt-1 mb-2 w-full" type="text" name="location" :value="old('category')" required autofocus />
+            <x-input-error :messages="$errors->get('eventLoca')" class="my-2" />
 
             <x-input-label for="events" :value="__('Category')" />
-            <select name="category_id">
+            <select class = "border-gray-300 mb-2 w-full focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" name="categoryId">
                 @foreach($categories as $category)
                     <option value="{{ $category->id }}">{{ $category->name }}</option>
                 @endforeach
             </select>
             <x-input-error :messages="$errors->get('event')" class="mt-2" />
+
+            <x-input-label for="eventsNumb" :value="__('Number of places')" />
+            <x-text-input id="eventsNumb" class="block mt-1 mb-2 w-full" type="number" name="spots" :value="old('category')" required autofocus />
+            <x-input-error :messages="$errors->get('eventNumb')" class="mt-2" />
+
+            <p class = "block font-medium text-sm text-gray-700">Activation</p>
+            <ul class="grid w-full gap-6 md:grid-cols-2 mt-4">
+            <li>
+                <input type="radio" id="activation-auto" name="activation" value="auto" class="hidden peer" checked required />
+                <label for="activation-auto" class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer peer-checked:border-blue-600 peer-checked:text-blue-600">                           
+                    <div class="block">
+                        <div class="w-full text-lg font-semibold">Automatic</div>
+                        <div class="w-full">Users will be automatically accepted</div>
+                    </div>
+                    <p class = "text-3xl"><i class="fa-solid fa-wand-sparkles"></i></p>
+                </label>
+            </li>
+            <li>
+                <input type="radio" id="activation-manual" name="activation" value="manual" class="hidden peer">
+                <label for="activation-manual" class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer peer-checked:border-blue-600 peer-checked:text-blue-600">
+                    <div class="block">
+                        <div class="w-full text-lg font-semibold">Manual</div>
+                        <div class="w-full">Users will have to wait for a manual acceptation</div>
+                    </div>
+                    <p class = "text-3xl"><i class="fa-solid fa-handshake-angle"></i></p>
+                </label>
+            </li>
+        </ul>
         </form>
         <div class="modal-action">
         <form method="dialog">
-            <button type = "submit" form = "eventForm" class = "btn-success btn">Submit</button>
+            <button type = "submit" form = "eventForm" class = "text-white btn-success btn">Submit</button>
             <button class="btn">Close</button>
         </form>
         </div>
