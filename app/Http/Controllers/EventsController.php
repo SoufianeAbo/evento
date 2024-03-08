@@ -24,4 +24,12 @@ class EventsController extends Controller
 
         return redirect('/dashboard');
     }
+
+    public function delete(Request $request): RedirectResponse
+    {
+        $event = Events::find($request->eventId);
+        $event->delete();
+
+        return redirect('/dashboard');
+    }
 }

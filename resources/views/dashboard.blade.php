@@ -164,6 +164,15 @@
                                 <div class="text-black font-medium text-md text-center lg:text-left px-2">
                                     {{ $event->description }}
                                 </div>
+
+                                <div class = "flex flex-row pt-4 px-2 gap-4">
+                                    <a class = "text-blue-600 hover:underline" href="#"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
+                                    <form action="{{ route('delete.event') }}" method = "POST">
+                                        @csrf
+                                        <input type="text" class = "hidden" name = "eventId" value = "{{ $event->id }}">
+                                        <button type = "submit" class = "text-red-600 hover:underline" href="#"><i class="fa-solid fa-trash"></i> Delete</button>
+                                    </form>
+                                </div>
                             </div>
                             <div class="flex flex-row items-center w-full lg:w-1/3 bg-white lg:justify-end justify-center px-2 py-4 lg:px-0">
                                 <span class="tracking-wider text-gray-600 bg-gray-200 px-2 text-sm rounded leading-loose mx-2 font-semibold">
@@ -173,7 +182,7 @@
                             </div>
                         </div>
                         @endforeach
-                        <div onclick = "eventCreator.showModal()" class="cursor-pointer text-5xl text-white flex justify-center items-center bg-green-600 w-full rounded py-8">
+                        <div onclick = "eventCreator.showModal()" class="cursor-pointer text-5xl text-white flex justify-center items-center bg-green-600 w-full rounded py-12">
                             <i class="fa-solid fa-circle-plus"></i>
                         </div>
                     </div>

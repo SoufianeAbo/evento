@@ -51,6 +51,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/categories/edit', [CategoriesController::class, 'edit'])->name('edit.category');
     Route::post('/categories/delete', [CategoriesController::class, 'delete'])->name('delete.category');
     Route::post('/dashboard/addevent', [EventsController::class, 'create'])->name('create.event');
+    Route::post('/dashboard/deleteEvent', [EventsController::class, 'delete'])->name('delete.event');
 });
 
 
