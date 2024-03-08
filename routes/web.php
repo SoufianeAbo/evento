@@ -5,7 +5,9 @@ use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\EventsController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Category;
+use App\Models\Events;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,12 +30,15 @@ Route::get('/dashboard', function () {
     $organizatorsData = User::role('organisator')->get();
     $bannedUsers = User::role('banned')->get();
     $categories = Category::all();
+    $events = Events::all();
+
+    $currentUser = Auth::user();
 
     $users = count(User::withCount('roles')->has('roles', 0)->get());
     $organizators = count($organizatorsData);
 
 
-    return view('dashboard', compact('users', 'organizators', 'usersData', 'organizatorsData', 'categories'));
+    return view('dashboard', compact('users', 'organizators', 'usersData', 'organizatorsData', 'categories', 'events', 'currentUser'));
 })->middleware(['checkBan', 'auth'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {

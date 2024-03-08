@@ -18,6 +18,8 @@ class EventsController extends Controller
             'categoryId' => $request->categoryId,
             'spots' => $request->spots,
             'activation' => $request->activation,
+            'organizerId' => $request->organizerId,
+            'status' => $request->status,
         ]);
 
         return redirect('/dashboard');
